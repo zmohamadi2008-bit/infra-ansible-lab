@@ -10,9 +10,9 @@
   deploy:
     runs-on: ubuntu-latest
 
- defaults:
-   run:
-    working-directory: ansible
+  defaults:
+    run:
+     working-directory: ansible
 
   steps:
    - name: Checkout repository
@@ -40,6 +40,6 @@
      run: |
       echo "${{ secrets.VAULT_PASS }}" > .vault_pass
 
-  - name: Run Ansible Playbook
-    run: |
-     ansible-playbook install_site.yml -i inventories/prod/hosts.yml
+   - name: Run Ansible Playbook
+      run: |
+       ansible-playbook install_site.yml -i inventories/prod/hosts.yml
