@@ -1,0 +1,36 @@
+---
+# tasks file for roles/postgresql
+- name: Install ACL package
+  apt:
+   name: acl
+   state: present
+
+- name: Install PostgreSQL
+  apt:
+   name:
+    - postgresql-{{ postgresql_version }}
+    - python3-psycopg2
+   state: present
+   update_cache: yes
+
+- name: Ensure PostgreSQL is running
+  service:
+   name: "{{ db_name }}"
+  become: yes
+  become_user: postgres
+
+- name: Create database
+  community.postgresql.postgresql_db:
+   name: "myapp_db"
+  become: yes
+  become_user: postgres
+
+- name: Create database user
+  community.postgresql.postgresql_user:
+   db: "{{ db_name }}"
+   name: "{{ db_user }}"
+   password: "{{db_password }}"
+   priv: "ALL"
+  become: yes
+  become_user: postgres
+

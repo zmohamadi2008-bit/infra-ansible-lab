@@ -1,0 +1,9 @@
+---
+# defaults file for roles/postgresql
+postgresql_version: "14"
+postgresql_service_state: started
+postgresql_service_enabled: yes
+
+db_name: "myapp_db"
+db_user: "db_admin"
+db_password: "SecurePassword123"
